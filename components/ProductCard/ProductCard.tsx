@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Key, useState } from "react";
+import { Key, SetStateAction, useState } from "react";
 import {
   CardContainer,
   ImageContainer,
@@ -10,7 +10,7 @@ import {
   Price,
   CardHeader,
 } from "./styled";
-import _, { uniq } from "lodash";
+import _ from "lodash";
 import ColorSwatch from "../ColorSwatch";
 import LikeButton from "../LikeButton";
 
@@ -58,7 +58,7 @@ const Card = ({ id, name, brand, variants }: Props) => {
       <ColorSwatch
         uniqueColor={uniqueColor}
         selectedVariant={uniqueColor[selectedVariant]}
-        updateVariant={(i) => setSelectedVariant(i)}
+        updateVariant={(i: SetStateAction<number>) => setSelectedVariant(i)}
         size={20}
       />
       <Footer>
@@ -80,7 +80,7 @@ const Card = ({ id, name, brand, variants }: Props) => {
   );
 };
 
-const ProductCard = ({ data }: Array<any>) => {
+const ProductCard = ({ data }: any) => {
   return (
     <Container>
       {data.map(

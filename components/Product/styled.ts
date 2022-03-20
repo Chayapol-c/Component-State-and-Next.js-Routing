@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Props } from "../../pages/globalStyle";
 
 export const ProductContainer = styled.div`
   display: flex;
@@ -78,10 +79,6 @@ export const Divider = styled.div`
   width: 100%;
   border: 1px solid #dedede;
 `;
-
-interface Props {
-  isSelectSize : boolean
-}
 
 export const AddToCardButton = styled.div<Props>`
   display: flex;

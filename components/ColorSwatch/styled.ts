@@ -1,9 +1,5 @@
 import styled from "styled-components";
-
-interface Props {
-  isSelected: boolean;
-  size: number;
-}
+import { Props } from '../../pages/globalStyle'
 
 const VariantContainer = styled.div`
   display: flex;

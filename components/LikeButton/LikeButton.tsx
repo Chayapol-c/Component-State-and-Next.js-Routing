@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LikeButtonContainer } from "./styled";
 
 type LikeButtonProps = {
-  size: string
+  size: 'small' | 'medium'
 }
 
 const heartSize = {

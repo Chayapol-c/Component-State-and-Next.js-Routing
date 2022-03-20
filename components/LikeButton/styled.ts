@@ -1,9 +1,5 @@
 import styled from "styled-components";
-
-interface Props {
-  size: number,
-  isToggle: boolean,
-}
+import { Props } from '../../pages/globalStyle'
 
 export const LikeButtonContainer = styled.button<Props>`
   display: flex;

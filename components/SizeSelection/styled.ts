@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import { Props } from "../../pages/globalStyle";
 
 export const SizeSelectionContainer = styled.div`
   display: flex;
   column-gap: 4px;
 `;
 
-export const SizeContainer = styled.button`
+
+
+export const SizeContainer = styled.button<Props>`
   &:disabled {
     color: #bebebe;
   }
