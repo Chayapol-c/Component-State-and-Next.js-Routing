@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { LikeButtonContainer } from "./styled";
 
+type LikeButtonProps = {
+  size: string
+}
+
 const heartSize = {
   small: {
     width: 15.19,
@@ -17,7 +21,7 @@ const buttonSize = {
   medium: 64,
 };
 
-const LikeButton = ({ size }) => {
+const LikeButton = ({ size }: LikeButtonProps) => {
   const [isToggle, setIsToggle] = useState<boolean>(false);
   return (
     <LikeButtonContainer

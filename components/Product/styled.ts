@@ -79,7 +79,11 @@ export const Divider = styled.div`
   border: 1px solid #dedede;
 `;
 
-export const AddToCardButton = styled.div`
+interface Props {
+  isSelectSize : boolean
+}
+
+export const AddToCardButton = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;

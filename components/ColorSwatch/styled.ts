@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+interface Props {
+  isSelected: boolean;
+  size: number;
+}
+
 const VariantContainer = styled.div`
   display: flex;
   /* position: absolute; */
@@ -9,7 +14,7 @@ const VariantContainer = styled.div`
   column-gap: 0.5rem;
 `;
 
-const VariantColor = styled.div`
+const VariantColor = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const LikeButtonContainer = styled.button`
+interface Props {
+  size: number,
+  isToggle: boolean,
+}
+
+export const LikeButtonContainer = styled.button<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
