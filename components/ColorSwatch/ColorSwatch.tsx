@@ -1,7 +1,16 @@
 import { Key } from "react";
 import { VariantColor, VariantContainer } from "./styled";
+import { IVariant } from '../../pages/globalStyle'
 
-const ColorSwatch = ({ uniqueColor, selectedVariant, updateVariant, size }: any) => {
+
+type ColorSwatchProps = {
+  uniqueColor: Array<any>,
+  selectedVariant: IVariant,
+  updateVariant: (arg0: any) => void,
+  size: number,
+}
+
+const ColorSwatch = ({ uniqueColor, selectedVariant, updateVariant, size }: ColorSwatchProps) => {
   return (
     <VariantContainer id="swatch-container">
       {uniqueColor.map((ele: { color: string | undefined; }, i: Key | null | undefined) => (

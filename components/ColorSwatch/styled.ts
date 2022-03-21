@@ -1,14 +1,16 @@
 import styled from "styled-components";
-import { Props } from '../../pages/globalStyle'
+// import { Props } from '../../pages/globalStyle'
 
 const VariantContainer = styled.div`
   display: flex;
-  /* position: absolute; */
-  /* bottom: 38px; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
   column-gap: 0.5rem;
 `;
+
+type Props = {
+  color: string | undefined
+  isSelected: boolean
+  size: number
+}
 
 const VariantColor = styled.div<Props>`
   display: flex;

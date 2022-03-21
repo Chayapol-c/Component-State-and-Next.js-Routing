@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import _ from "lodash";
@@ -22,30 +22,32 @@ import ColorSwatch from "../../components/ColorSwatch";
 import Spinner from "../../components/Spinner";
 import LikeButton from "../../components/LikeButton";
 import SizeSelection from "../../components/SizeSelection";
+import { IVariant } from "../globalStyle";
 
 type product = {
   name: string;
   description: string;
-  variants: any;
+  brand: string;
+  variants: Array<IVariant>;
 };
 
 const ProductPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [product, setProduct] = useState([] as unknown as product);
-  const [variants, setVariants] = useState([]);
+  const [variants, setVariants] = useState<IVariant[]>([]);
   const productUrl = `https://asia-southeast1-muze-academy.cloudfunctions.net/products/${id}`;
   const cartUrl =
     "https://asia-southeast1-muze-academy.cloudfunctions.net/cart";
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [amount, setAmount] = useState(1);
   const [stock, setStock] = useState(0);
-  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedSize, setSelectedSize] = useState("");
 
-  let discountPrice;
+  let discountPrice: number | undefined;
   if (variants.length > 0) {
     discountPrice =
-      variants[selectedVariant].price - variants[selectedVariant].discount;
+      variants[selectedVariant]?.price - variants[selectedVariant]?.discount ;
   }
   useEffect(() => {
     const fetchProduct = async () => {
@@ -53,7 +55,7 @@ const ProductPage: NextPage = () => {
       try {
         const res = await axios.get(productUrl);
         const data = await res.data;
-        const uniqueColor = _.uniqBy(data.variants, "color");
+        const uniqueColor = _.uniqBy(data.variants, "color") as unknown as IVariant[];
         setVariants(uniqueColor);
         setProduct(data);
       } catch (err) {
@@ -63,13 +65,13 @@ const ProductPage: NextPage = () => {
     fetchProduct();
   }, [router.isReady, productUrl]);
 
-  const handleSelectVariant = (i) => {
-    setSelectedSize(null);
+  const handleSelectVariant = (i: number) => {
+    setSelectedSize("");
     setSelectedVariant(i);
-    handleSelectSize(null, 0);
+    handleSelectSize("", 0);
   };
 
-  const handleSelectSize = (size, stock) => {
+  const handleSelectSize = (size: string, stock: number) => {
     setSelectedSize(size);
     setStock(stock);
     setAmount(1);
@@ -117,9 +119,10 @@ const ProductPage: NextPage = () => {
             <div className="label">Price</div>
             <div className="price">
               {variants.length > 0 &&
-                `$ ${parseFloat(discountPrice).toFixed(2)}`}
-              {variants.length > 0 && variants[selectedVariant].discount > 0 ? (
-                <Discount>$ {variants[selectedVariant].price}</Discount>
+                `$ ${parseFloat((variants[selectedVariant]?.price - variants[selectedVariant]?.discount).toString()).toFixed(2)}`}
+              {variants.length > 0 &&
+              variants[selectedVariant]?.discount > 0 ? (
+                <Discount>$ {variants[selectedVariant]?.price}</Discount>
               ) : (
                 ""
               )}
@@ -143,8 +146,6 @@ const ProductPage: NextPage = () => {
                   currentVariant={variants[selectedVariant]}
                   variants={product.variants}
                   selectedSize={selectedSize}
-                  setSelectedSize={setSelectedSize}
-                  updateStock={setStock}
                   updateVariant={handleSelectSize}
                 />
               )}

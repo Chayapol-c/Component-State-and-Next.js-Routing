@@ -1,14 +1,20 @@
 import { SizeSelectionContainer, SizeContainer } from "./styled";
+import { IVariant } from "../../pages/globalStyle";
 import _ from "lodash";
+
+type SizeSelectionProps = {
+  currentVariant: IVariant;
+  variants: Array<IVariant>;
+  selectedSize: string;
+  updateVariant: (args0: string, args1: number) => void;
+};
 
 const SizeSelection = ({
   currentVariant,
   variants,
   selectedSize,
-  setSelectedSize,
-  updateStock,
   updateVariant,
-}) => {
+}: SizeSelectionProps) => {
   const uniqueSize = variants.filter(
     (ele) => ele.color == currentVariant.color
   );

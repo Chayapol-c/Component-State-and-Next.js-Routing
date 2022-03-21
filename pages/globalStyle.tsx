@@ -12,4 +12,14 @@ const GlobalStyle = createGlobalStyle`
 	}
 `;
 
+interface IVariant {
+	discount: number
+	color: string
+	size: string 
+	price: number
+	stock: number
+	sku: string
+	imageUrl: string
+  }
+export type {IVariant}
 export default GlobalStyle;

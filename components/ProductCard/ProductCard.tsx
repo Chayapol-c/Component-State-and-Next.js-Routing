@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Key, SetStateAction, useState } from "react";
+import { Key, useState } from "react";
 import {
   CardContainer,
   ImageContainer,
@@ -28,12 +28,13 @@ const Card = ({ id, name, brand, variants }: Props) => {
     uniqueColor[selectedVariant].price - uniqueColor[selectedVariant].discount;
   const router = useRouter();
 
-  const handleNavigateProduct = (e) => {
+  const handleNavigateProduct = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement
     if (
-      e.target.id === "like-btn" ||
-      e.target.tagName === "path" ||
-      e.target.tagName === "svg" ||
-      e.target.id === "color"
+      target.id === "like-btn" ||
+      target.tagName === "path" ||
+      target.tagName === "svg" ||
+      target.id === "color"
     ) {
       console.log("except");
       return;
@@ -58,7 +59,7 @@ const Card = ({ id, name, brand, variants }: Props) => {
       <ColorSwatch
         uniqueColor={uniqueColor}
         selectedVariant={uniqueColor[selectedVariant]}
-        updateVariant={(i: SetStateAction<number>) => setSelectedVariant(i)}
+        updateVariant={(i: number) => setSelectedVariant(i)}
         size={20}
       />
       <Footer>
@@ -69,7 +70,7 @@ const Card = ({ id, name, brand, variants }: Props) => {
               : ""}
           </Discount>
           {uniqueColor[selectedVariant].discount > 0 ? (
-            <p>$ {parseFloat(discountPrice).toFixed(2)}</p>
+            <p>$ {parseFloat(discountPrice.toString()).toFixed(2)}</p>
           ) : (
             <p>$ {uniqueColor[selectedVariant].price}</p>
           )}

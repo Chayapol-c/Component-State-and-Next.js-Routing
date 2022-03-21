@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { Props } from "../../pages/globalStyle";
 
 export const SizeSelectionContainer = styled.div`
   display: flex;
   column-gap: 4px;
 `;
 
-
+type Props = {
+  isSelected: boolean
+}
 
 export const SizeContainer = styled.button<Props>`
   &:disabled {
